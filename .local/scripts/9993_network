@@ -62,7 +62,7 @@ then
     outb=$(printf "%.2f MB/s" $(echo "scale=2; $outbound / 1024 / 1024" | bc))
 elif [ $outbound -gt 1024 ]
 then
-    outb=$(printf "%.2f MB/s" $(echo "scale=2; $outbound / 1024" | bc))
+    outb=$(printf "%.2f KB/s" $(echo "scale=2; $outbound / 1024" | bc))
 else
     outb=$(printf "%i B/s" $outbound)
 fi
