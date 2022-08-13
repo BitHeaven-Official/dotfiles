@@ -1,8 +1,11 @@
+#!/bin/bash
+
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 xscreensaver &
-dwmbar &
 setxkbmap "us,ru" "" "grp:win_space_toggle" &
+
+sh ~/wallpapers/cyber1.sh &
 
 picom --experimental-backend &
 exec dwm

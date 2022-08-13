@@ -1,3 +1,3 @@
 #!/bin/bash
 
-[ -f ~/.xprofile ] && . ~/.xprofile
+[ -f ~/.xprofile ] && sh ~/.xprofile

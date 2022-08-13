@@ -1,0 +1,6 @@
+#!/bin/bash
+
+used=$(df -h / | sed -n '1!p' | cut -d' ' -f22)
+total=$(df -h / | sed -n '1!p' | cut -d' ' -f16)
+
+echo " $used/$total"

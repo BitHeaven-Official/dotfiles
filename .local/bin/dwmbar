@@ -1,0 +1,23 @@
+#!/bin/bash
+
+DELIM=" | "
+
+status() {
+    for FILE in $(ls ~/.local/scripts)
+    do
+        echo $DELIM
+        sh ~/.local/scripts/$FILE
+    done
+}
+
+time=$(date +"%s")
+
+while true
+do
+    if [ $(($time - $(date +"%s"))) -lt 0 ]
+    then
+        [ $(($time - $(date +"%s"))) -ge 0 ] && echo $(($time - $(date +"%s")))
+        xprop -root -set WM_NAME "$(status | tr '\n' ' ')"
+        time=$(date +"%s")
+    fi
+done
