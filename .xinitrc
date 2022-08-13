@@ -4,5 +4,5 @@ xscreensaver &
 setxkbmap "us,ru" "" "grp:win_space_toggle" &
 keepassxc &
 
-picom --experimantal-backends &
+picom --experimental-backend &
 exec dwm
