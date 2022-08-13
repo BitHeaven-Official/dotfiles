@@ -1,8 +1,3 @@
-export _JAVA_AWT_WM_NONREPARENTING=1
+#!/bin/bash
 
-xscreensaver &
-setxkbmap "us,ru" "" "grp:win_space_toggle" &
-keepassxc &
-
-picom --experimental-backend &
-exec dwm
+[ -f ~/.xprofile ] && . ~/.xprofile
