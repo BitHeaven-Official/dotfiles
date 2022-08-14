@@ -3,4 +3,9 @@
 power=$(nmcli -f IN-USE,SIGNAL,SSID device wifi | grep "*" | cut -d' ' -f8)
 name=$(nmcli -f IN-USE,SIGNAL,SSID device wifi | grep "*" | cut -d' ' -f14)
 
-echo " $name $power"
+if [[ ! $name ]]
+then
+    echo "  "
+else
+    echo "  $name $power"
+fi
