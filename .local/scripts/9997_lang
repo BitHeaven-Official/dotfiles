@@ -1,0 +1,8 @@
+#!/bin/bash
+
+COLOR1="#FF5800"
+COLOR2="#973400"
+
+lang=$(xkblayout-state print %s)
+
+echo "^b$COLOR1^^c$COLOR2^  ^c$COLOR1^^b$COLOR2^ $lang ^d^"

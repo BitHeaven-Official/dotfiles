@@ -1,6 +1,0 @@
-#!/bin/bash
-
-date=$(date +"%d.%m.%y")
-time=$(date +"%H:%M:%S")
-
-echo " $date  $time"

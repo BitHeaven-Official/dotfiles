@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DELIM=" | "
+DELIM=" "
 
 status() {
     for FILE in $(ls ~/.local/scripts)

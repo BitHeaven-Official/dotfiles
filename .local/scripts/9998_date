@@ -1,0 +1,8 @@
+#!/bin/bash
+
+COLOR1="#17FF00"
+COLOR2="#0EA100"
+
+date=$(date +"%d.%m.%y")
+
+echo "^b$COLOR1^^c$COLOR2^  ^c$COLOR1^^b$COLOR2^ $date ^d^"

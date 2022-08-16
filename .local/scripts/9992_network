@@ -1,6 +1,8 @@
 #!/bin/bash
 
 DEVICE=wlan0
+COLOR1="#FF9B00"
+COLOR2="#A16200"
 
 good=0
 for gooddev in `grep \: /proc/net/dev | awk -F: '{print $1}'`
@@ -67,4 +69,5 @@ else
     outb=$(printf "%i B/s" $outbound)
 fi
 
-echo "In: $inb  Out: $outb"
+
+echo "^c$COLOR1^^b$COLOR2^ In: $inb ^b$COLOR1^^c$COLOR2^  ^c$COLOR1^^b$COLOR2^ Out: $outb ^d^"

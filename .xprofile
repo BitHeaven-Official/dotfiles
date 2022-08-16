@@ -4,8 +4,12 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 xscreensaver &
 setxkbmap "us,ru" "" "grp:win_space_toggle" &
+setxkbmap -option caps:none &
+xset s off &
+xset -dpms &
 
 sh ~/wallpapers/cyber1.sh &
+sh ~/.local/bin/dwmbar &
 
 picom --experimental-backend &
-exec dwm
+dbus-run-session -- dwm

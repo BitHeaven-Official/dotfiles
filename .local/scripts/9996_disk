@@ -1,6 +1,9 @@
 #!/bin/bash
 
+COLOR1="#00FF90"
+COLOR2="#00A45D"
+
 used=$(df -h / | sed -n '1!p' | cut -d' ' -f22)
 total=$(df -h / | sed -n '1!p' | cut -d' ' -f16)
 
-echo " $used/$total"
+echo "^b$COLOR1^^c$COLOR2^  ^c$COLOR1^^b$COLOR2^ $used/$total ^d^"
