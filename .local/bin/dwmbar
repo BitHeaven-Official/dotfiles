@@ -1,12 +1,22 @@
 #!/bin/bash
 
-DELIM=" "
+DELIM="  "
+DELIM_START=0
 
 status() {
+    strt=0
+    [ $DELIM_START -eq 1 ] && strt=1
+
     for FILE in $(ls ~/.local/scripts)
     do
-        echo $DELIM
-        sh ~/.local/scripts/$FILE
+        res=$(sh ~/.local/scripts/$FILE)
+        if [ $strt -eq 0 ]
+        then
+            strt=1
+            echo "$res"
+        else
+            echo "$DELIM$res"
+        fi
     done
 }
 
@@ -16,8 +26,8 @@ while true
 do
     if [ $(($time - $(date +"%s"))) -lt 0 ]
     then
-        [ $(($time - $(date +"%s"))) -ge 0 ] && echo $(($time - $(date +"%s")))
-        xprop -root -set WM_NAME "$(status | tr '\n' ' ')"
+        stat=$(status | tr -d '\n')
+        xprop -root -set WM_NAME "$stat"
         time=$(date +"%s")
     fi
 done
