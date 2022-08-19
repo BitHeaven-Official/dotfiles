@@ -3,13 +3,35 @@
 DELIM="  "
 DELIM_START=0
 
+mkdir -p ~/.local/tmp/
+
+run() {
+    for FILE in $(ls ~/.local/scripts)
+    do
+        touch "$HOME/.local/tmp/.tmp_$(echo $FILE | cut -d'_' -f3)_BIT"
+        {
+        while true
+        do
+            echo "$(sh ~/.local/scripts/$FILE)" > "$HOME/.local/tmp/.tmp_$(echo $FILE | cut -d'_' -f3)_BIT"
+            sleep=$(echo $FILE | cut -d'_' -f2)
+            if [ $sleep -eq 0 ]
+            then
+                sleep=0.1
+            fi
+            sleep $sleep
+        done
+        } &
+    done
+}
+
 status() {
     strt=0
     [ $DELIM_START -eq 1 ] && strt=1
 
     for FILE in $(ls ~/.local/scripts)
     do
-        res=$(sh ~/.local/scripts/$FILE)
+        res=$(cat "$HOME/.local/tmp/.tmp_$(echo $FILE | cut -d'_' -f3)_BIT")
+
         if [ $strt -eq 0 ]
         then
             strt=1
@@ -20,14 +42,12 @@ status() {
     done
 }
 
-time=$(date +"%s")
+run
 
-while true
+while :
 do
-    if [ $(($time - $(date +"%s"))) -lt 0 ]
-    then
-        stat=$(status | tr -d '\n')
-        xprop -root -set WM_NAME "$stat"
-        time=$(date +"%s")
-    fi
+    stat=$(status | tr -d '\n')
+    xprop -root -set WM_NAME "$stat"
+    sleep 0.1
 done
+

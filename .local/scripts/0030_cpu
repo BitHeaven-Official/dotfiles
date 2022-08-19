@@ -1,8 +1,0 @@
-#!/bin/bash
-
-COLOR1="#990057"
-COLOR2="#FF00B2"
-
-usage=$(cat <(grep 'cpu ' /proc/stat) <(sleep 0.3 && grep 'cpu ' /proc/stat) | awk -v RS="" '{print ($13-$2+$15-$4)*100/($13-$2+$15-$4+$16-$5)}' | cut -d'.' -f1)"%"
-
-echo "^c$COLOR1^^b$COLOR2^  ^b$COLOR1^^c$COLOR2^ $usage ^d^"
