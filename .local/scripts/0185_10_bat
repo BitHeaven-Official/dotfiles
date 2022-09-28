@@ -23,6 +23,16 @@ else
     icon=""
 fi
 
+chrg=$(cat /sys/class/power_supply/$DEVICE/status)
+
+if [[ "$chrg" == "Charging" ]]
+then
+    icon=""
+elif [[ "$chrg" == "Full" ]]
+then
+    icon=""
+fi
+
 batpercent="$(echo $batpercent)%"
 
 echo "^b$COLOR1^^c$COLOR2^ $icon ^c$COLOR1^^b$COLOR2^ $batpercent ^d^"
