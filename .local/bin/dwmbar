@@ -1,5 +1,6 @@
 #!/bin/bash
 
+DD=";"
 DELIM="  "
 DELIM_START=0
 
@@ -47,7 +48,9 @@ run
 while :
 do
     stat=$(status | tr -d '\n')
-    xprop -root -set WM_NAME "$stat"
+    extrabarleft="^b#440044^Status^d^ ^c#ff0000^bar 2^d^"
+    extrabarright="^b#444400^Right ^b#00ff00^text^d^ ^c#ff0000^pisec ^b#000044^dlinee3bu^d^"
+    xprop -root -set WM_NAME "$stat$DD$extrabarleft$DD$extrabarright"
     sleep 0.1
 done
 

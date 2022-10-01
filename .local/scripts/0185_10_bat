@@ -1,9 +1,15 @@
 #!/bin/bash
 
-DEVICE=BAT1
+DEVICE="BAT1"
+
 COLOR1="#FF00F4"
 COLOR2="#83007D"
 
+
+if [ ! -f "$FILE" ]
+then
+    DEVICE="$(ls /sys/class/power_supply/ -1 -t | head -1)"
+fi
 
 batpercent="$(cat /sys/class/power_supply/$DEVICE/capacity)"
 
