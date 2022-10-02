@@ -7,13 +7,49 @@ DELIM_START=0
 mkdir -p ~/.local/tmp/
 
 run() {
-    for FILE in $(ls ~/.local/scripts)
+    chmod +x -R ~/.local/scripts/
+
+    for FILE in $(ls ~/.local/scripts/status)
     do
-        touch "$HOME/.local/tmp/.tmp_$(echo $FILE | cut -d'_' -f3)_BIT"
+        touch "$HOME/.local/tmp/.tmpSTATUS_$(echo $FILE | cut -d'_' -f3)_BIT"
         {
         while true
         do
-            echo "$(sh ~/.local/scripts/$FILE)" > "$HOME/.local/tmp/.tmp_$(echo $FILE | cut -d'_' -f3)_BIT"
+            echo "$(. ~/.local/scripts/status/$FILE)" > "$HOME/.local/tmp/.tmpSTATUS_$(echo $FILE | cut -d'_' -f3)_BIT"
+            sleep=$(echo $FILE | cut -d'_' -f2)
+            if [ $sleep -eq 0 ]
+            then
+                sleep=0.1
+            fi
+            sleep $sleep
+        done
+        } &
+    done
+
+    for FILE in $(ls ~/.local/scripts/bbl)
+    do
+        touch "$HOME/.local/tmp/.tmpBBL_$(echo $FILE | cut -d'_' -f3)_BIT"
+        {
+        while true
+        do
+            echo "$(. ~/.local/scripts/bbl/$FILE)" > "$HOME/.local/tmp/.tmpBBL_$(echo $FILE | cut -d'_' -f3)_BIT"
+            sleep=$(echo $FILE | cut -d'_' -f2)
+            if [ $sleep -eq 0 ]
+            then
+                sleep=0.1
+            fi
+            sleep $sleep
+        done
+        } &
+    done
+
+    for FILE in $(ls ~/.local/scripts/bbr)
+    do
+        touch "$HOME/.local/tmp/.tmpBBR_$(echo $FILE | cut -d'_' -f3)_BIT"
+        {
+        while true
+        do
+            echo "$(. ~/.local/scripts/bbr/$FILE)" > "$HOME/.local/tmp/.tmpBBR_$(echo $FILE | cut -d'_' -f3)_BIT"
             sleep=$(echo $FILE | cut -d'_' -f2)
             if [ $sleep -eq 0 ]
             then
@@ -29,9 +65,45 @@ status() {
     strt=0
     [ $DELIM_START -eq 1 ] && strt=1
 
-    for FILE in $(ls ~/.local/scripts)
+    for FILE in $(ls ~/.local/scripts/status)
     do
-        res=$(cat "$HOME/.local/tmp/.tmp_$(echo $FILE | cut -d'_' -f3)_BIT")
+        res=$(cat "$HOME/.local/tmp/.tmpSTATUS_$(echo $FILE | cut -d'_' -f3)_BIT")
+
+        if [ $strt -eq 0 ]
+        then
+            strt=1
+            echo "$res"
+        else
+            echo "$DELIM$res"
+        fi
+    done
+}
+
+barbl() {
+    strt=0
+    [ $DELIM_START -eq 1 ] && strt=1
+
+    for FILE in $(ls ~/.local/scripts/bbl)
+    do
+        res=$(cat "$HOME/.local/tmp/.tmpBBL_$(echo $FILE | cut -d'_' -f3)_BIT")
+
+        if [ $strt -eq 0 ]
+        then
+            strt=1
+            echo "$res"
+        else
+            echo "$DELIM$res"
+        fi
+    done
+}
+
+barbr() {
+    strt=0
+    [ $DELIM_START -eq 1 ] && strt=1
+
+    for FILE in $(ls ~/.local/scripts/bbr)
+    do
+        res=$(cat "$HOME/.local/tmp/.tmpBBR_$(echo $FILE | cut -d'_' -f3)_BIT")
 
         if [ $strt -eq 0 ]
         then
@@ -47,10 +119,9 @@ run
 
 while :
 do
-    stat=$(status | tr -d '\n')
-    extrabarleft="^b#440044^Status^d^ ^c#ff0000^bar 2^d^"
-    extrabarright="^b#444400^Right ^b#00ff00^text^d^ ^c#ff0000^pisec ^b#000044^dlinee3bu^d^"
-    xprop -root -set WM_NAME "$stat$DD$extrabarleft$DD$extrabarright"
+    statmain=$(status | tr -d '\n')
+    statbl=$(barbl | tr -d '\n')
+    statbr=$(barbr | tr -d '\n')
+    xprop -root -set WM_NAME "$statmain$DD$statbl$DD$statbr"
     sleep 0.1
 done
-

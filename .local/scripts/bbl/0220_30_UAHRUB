@@ -1,0 +1,12 @@
+#!/bin/bash
+
+COLOR1="#AAAAAA"
+COLOR2="#444444"
+
+
+uu=$(curl -s 'https://api.binance.com/api/v3/ticker/24hr?symbol=USDTUAH' -H 'accept: application/json' | grep -o 'lastPrice":"[^"]*' | cut -d\" -f3 | sed 's/.\{6\}$//')
+ur=$(curl -s 'https://api.binance.com/api/v3/ticker/24hr?symbol=USDTRUB' -H 'accept: application/json' | grep -o 'lastPrice":"[^"]*' | cut -d\" -f3 | sed 's/.\{6\}$//')
+price=$(awk "BEGIN{print $ur/$uu}")
+price=$(printf %.2f "$price")
+
+echo "^b$COLOR1^^c$COLOR2^ ₴ ^c$COLOR1^^b$COLOR2^ $price RUB ^d^"

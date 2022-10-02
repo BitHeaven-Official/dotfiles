@@ -1,0 +1,9 @@
+#!/bin/bash
+
+COLOR1="#AAAAAA"
+COLOR2="#444444"
+
+
+price=$(curl -s 'https://api.binance.com/api/v3/ticker/24hr?symbol=USDTRUB' -H 'accept: application/json' | grep -o 'lastPrice":"[^"]*' | cut -d\" -f3 | sed 's/.\{6\}$//')
+
+echo "^b$COLOR1^^c$COLOR2^ USDT ^c$COLOR1^^b$COLOR2^ $price RUB ^d^"

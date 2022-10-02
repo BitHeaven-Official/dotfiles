@@ -1,0 +1,17 @@
+#!/bin/bash
+
+CITY="Tyumen"
+
+COLOR1="#AAAAAA"
+COLOR2="#444444"
+
+
+icon=$(curl -s "wttr.in/$CITY?format=%c")
+icon=$(echo $icon | tr -d ' ')
+
+temp=$(curl -s "wttr.in/$CITY?format=%t")
+
+wind=$(curl -s "wttr.in/$CITY?format=%w")
+
+
+echo "^b$COLOR2^^c$COLOR1^ $wind ^b$COLOR1^^c$COLOR2^ $icon ^c$COLOR1^^b$COLOR2^ $temp ^d^"
