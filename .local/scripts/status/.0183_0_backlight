@@ -1,0 +1,18 @@
+#!/bin/bash
+
+DEVICE="amdgpu_bl0"
+
+COLOR1="#FFF400"
+COLOR2="#A39C00"
+
+
+if [ ! -f "$FILE" ]
+then
+    DEVICE="$(ls /sys/class/backlight/ -1 -t | head -1)"
+fi
+
+curr="$(cat /sys/class/backlight/$DEVICE/brightness)"
+max="$(cat /sys/class/backlight/$DEVICE/max_brightness)"
+
+echo "^b$COLOR1^^c$COLOR2^  ^c$COLOR1^^b$COLOR2^ $curr/$max ^d^"
+

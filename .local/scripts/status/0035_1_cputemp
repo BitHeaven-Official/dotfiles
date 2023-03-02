@@ -1,0 +1,24 @@
+#!/bin/bash
+
+COLOR1="#AE8BF9"
+COLOR2="#773DF5"
+
+cputemp=$(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000))
+
+if [ $cputemp -ge 90 ]
+then
+    tempicon=""
+elif [ $cputemp -ge 75 ]
+then
+    tempicon=""
+elif [ $cputemp -ge 60 ]
+then
+    tempicon=""
+elif [ $cputemp -ge 45 ]
+then
+    tempicon=""
+else
+    tempicon=""
+fi
+
+echo "^b$COLOR1^^c$COLOR2^ $tempicon ^c$COLOR1^^b$COLOR2^ $cputemp ^d^"

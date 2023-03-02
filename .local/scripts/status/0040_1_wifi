@@ -6,7 +6,7 @@ COLOR2="#005083"
 power=$(nmcli -f IN-USE,SIGNAL,SSID device wifi | grep "*" | cut -d' ' -f8)
 name=$(nmcli -f IN-USE,SIGNAL,SSID device wifi | grep "*" | cut -d' ' -f14)
 
-if [[ ! $name ]]
+if [ ! $name ]
 then
     echo "^b$COLOR1^^c$COLOR2^  ^c$COLOR1^^b$COLOR2^  ^d^"
 else

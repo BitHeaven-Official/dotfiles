@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DEVICE=wlan0
+DEVICE=wlp2s0
 COLOR1="#FF9B00"
 COLOR2="#A16200"
 
@@ -16,8 +16,7 @@ done
 
 if [ $good -eq 0 ]
 then
-    echo "Change DEVICE in ~/.local/scripts/0010_1_network"
-        grep ":" /proc/net/dev | awk -F: '{print $1}' | sed s@\ @@g
+    echo "0010"
     exit 1
 fi
 
@@ -47,25 +46,8 @@ TXNET_BIT=`echo $line | awk '{print $9}'`
 echo $RXNET_BIT > $HOME/.local/tmp/.tmp_RXNET_BIT
 echo $TXNET_BIT > $HOME/.local/tmp/.tmp_TXNET_BIT
 
-if [ $inbound -gt $((1024*1024)) ]
-then
-    inb=$(printf "%.2f MB/s" $(echo "scale=2; $inbound / 1024 / 1024" | bc))
-elif [ $inbound -gt 1024 ]
-then
-    inb=$(printf "%.2f KB/s" $(echo "scale=2; $inbound / 1024" | bc))
-else
-    inb=$(printf "%i B/s" $inbound)
-fi
+inb=$(printf "%.0f MB/s" $(echo "scale=2; $inbound / 1024 / 1024" | bc))
 
-if [ $outbound -gt $((1024*1024)) ]
-then
-    outb=$(printf "%.2f MB/s" $(echo "scale=2; $outbound / 1024 / 1024" | bc))
-elif [ $outbound -gt 1024 ]
-then
-    outb=$(printf "%.2f KB/s" $(echo "scale=2; $outbound / 1024" | bc))
-else
-    outb=$(printf "%i B/s" $outbound)
-fi
+outb=$(printf "%.0f MB/s" $(echo "scale=2; $outbound / 1024 / 1024" | bc))
 
-
-echo "^c$COLOR1^^b$COLOR2^ In: $inb ^b$COLOR1^^c$COLOR2^  ^c$COLOR1^^b$COLOR2^ Out: $outb ^d^"
+echo "^c$COLOR1^^b$COLOR2^ $inb ^b$COLOR1^^c$COLOR2^  ^c$COLOR1^^b$COLOR2^ $outb ^d^"

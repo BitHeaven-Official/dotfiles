@@ -1,40 +1,41 @@
 #!/bin/bash
 
-DEVICE="BAT1"
+DEVICE="BAT0"
 
 COLOR1="#FF00F4"
 COLOR2="#83007D"
 
 
-if [ ! -f "$FILE" ]
+if [ ! -f "/sys/class/power_supply/$DEVICE/capacity" ]
 then
-    DEVICE="$(ls /sys/class/power_supply/ -1 -t | head -1)"
+    echo "0185"
+    exit 1
 fi
 
 batpercent="$(cat /sys/class/power_supply/$DEVICE/capacity)"
 
-if [[ $((batpercent + 0)) -ge 80 ]]
+if [ $batpercent -ge 80 ]
 then
     icon=""
-elif [[ $((batpercent + 0)) -ge 60 ]]
+elif [ $batpercent -ge 60 ]
 then
     icon=""
-elif [[ $((batpercent + 0)) -ge 40 ]]
+elif [ $batpercent -ge 40 ]
 then
     icon=""
-elif [[ $((batpercent + 0)) -ge 20 ]]
+elif [ $batpercent -ge 20 ]
 then
     icon=""
 else
     icon=""
 fi
 
-chrg=$(cat /sys/class/power_supply/$DEVICE/status)
+chrg="$(cat /sys/class/power_supply/$DEVICE/status)"
 
-if [[ "$chrg" == "Charging" ]]
+if [ "$chrg" = "Charging" ]
 then
     icon=""
-elif [[ "$chrg" == "Full" ]]
+elif [ "$chrg" = "Full" ]
 then
     icon=""
 fi
