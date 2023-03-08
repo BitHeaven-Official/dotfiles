@@ -19,4 +19,4 @@ temp=$(curl -s "wttr.in/$CITY?format=%t")
 wind=$(curl -s https://wttr.in/@178.23.190.182?format=j2 | python3 -c "import sys, json; print(json.load(sys.stdin)['current_condition'][0]['windspeedKmph'])")
 
 
-echo "^b$COLOR2^^c$COLOR1^ $wind ^b$COLOR1^^c$COLOR2^ $icon ^c$COLOR1^^b$COLOR2^ $temp ^d^"
+echo "^b$COLOR2^^c$COLOR1^ $wind km/h ^b$COLOR1^^c$COLOR2^ $icon ^c$COLOR1^^b$COLOR2^ $temp ^d^"
