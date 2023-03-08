@@ -1,12 +1,17 @@
 #!/bin/bash
 
-CITY="Tyumen"
+CITY="auto"
 
 COLOR1="#AAAAAA"
 COLOR2="#444444"
 
 
-icon=$(curl -s "wttr.in/$CITY?format=%c")
+if[$CITY = 'auto']
+then
+  CITY="@$(curl zx2c4.com/ip | head -1)"
+fi
+
+icon=$(curl -s "wttr.in/$CITY?format=%C")
 icon=$(echo $icon | tr -d ' ')
 
 temp=$(curl -s "wttr.in/$CITY?format=%t")
@@ -14,4 +19,4 @@ temp=$(curl -s "wttr.in/$CITY?format=%t")
 wind=$(curl -s "wttr.in/$CITY?format=%w")
 
 
-echo "^b$COLOR2^^c$COLOR1^ $wind ^b$COLOR1^^c$COLOR2^ $icon ^c$COLOR1^^b$COLOR2^ $temp ^d^"
+echo "^b$COLOR2^^c$COLOR1^  ^b$COLOR1^^c$COLOR2^ $icon ^c$COLOR1^^b$COLOR2^ $temp ^d^"
