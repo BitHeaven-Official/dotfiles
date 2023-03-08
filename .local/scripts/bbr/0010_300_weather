@@ -6,9 +6,9 @@ COLOR1="#AAAAAA"
 COLOR2="#444444"
 
 
-if[$CITY = 'auto']
+if [ $CITY = "auto" ]
 then
-  CITY="@$(curl zx2c4.com/ip | head -1)"
+  CITY="@$(curl -s zx2c4.com/ip | head -1)"
 fi
 
 icon=$(curl -s "wttr.in/$CITY?format=%C")
