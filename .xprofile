@@ -2,16 +2,37 @@
 
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-xscreensaver &
+#xscreensaver &
 setxkbmap "us,ru" "" "grp:win_space_toggle" -option caps:none &
 xset s off &
 xset -dpms &
 
 #sh ~/wallpapers/cyber1.sh &
 
+twmnd &
 picom --experimental-backend &
 sh ~/.local/bin/dwmbar &
-sh ~/.local/bin/randwallpaper &
+#sh ~/.local/bin/randwallpaper &
+
+# attraction atunnel barcode binaryring cloudlife compass coral cubegrid deepstars fadeplot flurry glmatrix grav headroom intermomentary lament noof providence pyro rorschach
+xwinwrap -g 3840x2160 -ni -s -nf -b -un -ov -fdt -argb -- /usr/libexec/xscreensaver/fadeplot -window-id WID &
+
+# ----- 1 -----
+st &
+# ----- 2 -----
+code &
+# ----- 3 -----
+QT_SCALE_FACTOR=1.0000001 keepassxc &
+# ----- 4 -----
+discord &
+/home/bitheaven/Documents/Telegram/Telegram &
+# ----- 7 -----
+qjackctl &
+corectrl &
+patchmatrix &
+blueman-manager &
+# ----- 9 -----
+firefox &
 
 dbus-launch --exit-with-session dwm
 #dbus-run-session -- dwm
